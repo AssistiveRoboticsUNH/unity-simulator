@@ -160,22 +160,19 @@ private:
 
 };
 
-bool rosInitialized = false;
-
-void initROS() {
-    if (!rosInitialized) {
-        auto name = "ros_node";
-        rclcpp::init(1, &name);
-        rosInitialized = true;
-    }
-}
-
 class ROSInterface {
 public:
 
     ROSInterface() {
-        initROS();
+        auto name = "ros_node";
+        rclcpp::init(1, &name);
         node_ = std::make_shared<MinimalPublisher>();
+    }
+
+    ~ROSInterface() {
+        std::lock_guard<std::mutex> lock(node_->mutex_);
+        node_->shutdown = true;
+        rclcpp::shutdown();
     }
 
     void PublishTF(NativeTransform *input) {

@@ -134,12 +134,20 @@ public class ROSInterface : MonoBehaviour
     private Vector3 prev_forward;
     private Vector3 prev_position;
 
+    ~ROSInterface()
+    {
+        if (handle != null)
+        {
+            Destroy(handle);
+        }
+    }
+
     void Start()
     {
         color_cameras = FindObjectsOfType<ImagePublisher>();
         depth_cameras = FindObjectsOfType<DepthImagePublisher>();
         laser_scanners = FindObjectsOfType<LaserScanPublisher>();
-        
+
         prev_forward = new Vector3();
         prev_position = new Vector3();
         prev_position = odom_transform.position;
@@ -241,22 +249,24 @@ public class ROSInterface : MonoBehaviour
         {
             native_eating.data = 1;
         }
+
         PublishInt32(handle, ref native_eating);
-        
+
         native_taking_medicine.data = 0;
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("pill"))
         {
             native_taking_medicine.data = 1;
         }
+
         PublishInt32(handle, ref native_taking_medicine);
-        
+
 
         SetTransform(odom_transform, ref native_odom.pose);
         PublishOdom(handle, ref native_odom);
 
         // if (Input.GetKeyDown(KeyCode.Space))
         ReceiveCmdVel(handle, ref native_twist);
-        
+
         foreach (var cam in color_cameras)
         {
             if (cam.should_publish)
@@ -277,7 +287,7 @@ public class ROSInterface : MonoBehaviour
                 cam.should_publish = false;
             }
         }
-        
+
         foreach (var cam in depth_cameras)
         {
             if (cam.should_publish)
@@ -298,7 +308,7 @@ public class ROSInterface : MonoBehaviour
                 cam.should_publish = false;
             }
         }
-        
+
         foreach (var laser in laser_scanners)
         {
             if (laser.should_publish)
@@ -308,7 +318,7 @@ public class ROSInterface : MonoBehaviour
                 native_scan.angle_min = laser.angle_min;
                 native_scan.angle_max = laser.angle_max;
                 native_scan.angle_increment = laser.angle_increment;
-                native_scan.time_increment= laser.time_increment;
+                native_scan.time_increment = laser.time_increment;
                 native_scan.scan_time = laser.scan_time;
                 native_scan.range_min = laser.range_min;
                 native_scan.range_max = laser.range_max;
@@ -326,7 +336,6 @@ public class ROSInterface : MonoBehaviour
                 laser.should_publish = false;
             }
         }
-
     }
 
     [DllImport("libROSInterface.so", EntryPoint = "Init", CallingConvention = CallingConvention.Cdecl)]
@@ -346,10 +355,10 @@ public class ROSInterface : MonoBehaviour
 
     [DllImport("libROSInterface.so", EntryPoint = "PublishImage", CallingConvention = CallingConvention.Cdecl)]
     private static extern void PublishImage(IntPtr handle, ref NativeImage input);
-    
+
     [DllImport("libROSInterface.so", EntryPoint = "PublishScan", CallingConvention = CallingConvention.Cdecl)]
     private static extern void PublishScan(IntPtr handle, ref NativeScan input);
-    
+
     [DllImport("libROSInterface.so", EntryPoint = "ReceiveCmdVel", CallingConvention = CallingConvention.Cdecl)]
     private static extern void ReceiveCmdVel(IntPtr handle, ref NativeTwist output);
 }

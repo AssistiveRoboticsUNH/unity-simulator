@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.pac48.unity.unity-ros2": {
+      "version": "https://github.com/pac48/unity-ros2.git?path=/com.pac48.unity.unity-ros2",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.6"
+      },
+      "hash": "c1e82c2fbd07f5b383ec985b3eba269d86facd56"
+    },
     "com.siccity.gltfutility": {
       "version": "https://github.com/siccity/gltfutility.git",
       "depth": 0,

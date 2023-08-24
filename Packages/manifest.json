@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.pac48.unity.unity-ros2": "https://github.com/pac48/unity-ros2.git?path=/com.pac48.unity.unity-ros2",
+    "com.pac48.unity.unity-ros2": "https://github.com/olaghattas/unity-ros2.git?path=/com.pac48.unity.unity-ros2",
     "com.siccity.gltfutility": "https://github.com/siccity/gltfutility.git",
     "com.unity.ai.navigation": "1.1.1",
     "com.unity.burst": "1.8.7",

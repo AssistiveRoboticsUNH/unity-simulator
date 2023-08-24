@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.pac48.unity.unity-ros2": {
-      "version": "https://github.com/pac48/unity-ros2.git?path=/com.pac48.unity.unity-ros2",
+      "version": "https://github.com/olaghattas/unity-ros2.git?path=/com.pac48.unity.unity-ros2",
       "depth": 0,
       "source": "git",
       "dependencies": {

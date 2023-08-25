@@ -149,7 +149,7 @@ public class GetCollisionWithDoors :MonoBehaviour
         }
         string json = JsonConvert.SerializeObject(collisionpointsList);
         string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
-        string filePath = Path.Combine(downloadsPath, "collision_door/collision7" +
+        string filePath = Path.Combine(downloadsPath, "collisionpts_hewitthall/collision5" +
                                                       ".json");
         File.WriteAllText(filePath, json);
     }

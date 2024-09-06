@@ -29,3 +29,9 @@ This unity project uses several non-default packages:
 `right-click and drag` : pan camera
 
 `mouse wheel` : zoom in
+
+STEPS:
+1) install unityhub from https://docs.unity3d.com/hub/manual/InstallHub.html note that you need libssl1.0 check this https://dev.to/brenomfviana/installing-unity-hub-on-ubuntu-42l0
+2) clone the package
+3) OPEN UNITY THROUGH THE TERMINAL OR YOU WONT GET TOPICS by running unityhub
+4) once it opens click on Open project in the top right corner and select this directory that you cloned.
